@@ -39,7 +39,7 @@ jobs:
     - name: Docker Build & Push Action
       uses: mr-smithers-excellent/docker-build-push@v6.4
       with:
-          image: pedrosilvanascimento/picpay-api-workflow
+          image: laura4343/treino-devops
           tags: ${{ github.run_number }}, ${{ steps.version.outputs.previous-version }} $.prod
           registry: docker.io
           dockerfile: dockerfile
