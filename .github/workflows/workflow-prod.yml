@@ -30,3 +30,19 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: verificar branch
       run: echo =-=- ESTAMOS RODANDO EM PROD -=-=
+
+    - name: Git Version
+      id: version
+      uses: codacy/git-version@2.7.1
+
+    
+    - name: Docker Build & Push Action
+      uses: mr-smithers-excellent/docker-build-push@v6.4
+      with:
+          image: pedrosilvanascimento/picpay-api-workflow
+          tags: ${{ github.run_number }}, ${{ steps.version.outputs.previous-version }} $.prod
+          registry: docker.io
+          dockerfile: dockerfile
+          username: ${{secrets.DOCKERHUB_USER}}
+          password: ${{secrets.DOCKER_PASSWORD}}
+
